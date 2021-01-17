@@ -1,6 +1,12 @@
 # QR-BarcodeScanner
 Scanner for common types of QR-Codes and Barcodes
 
+## Screenshots
+
+Scanner Lightmode            |  No Authorization Light             |  Scanner Darkmode |  No Authorization Dark
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![ScannerLight](https://github.com/miappks/QR-BarcodeScanner/blob/main/Screenshots/ScannerLight.PNG)  |  ![SettingsLight](https://github.com/miappks/QR-BarcodeScanner/blob/main/Screenshots/SettingsLight.PNG) | ![ScannerDark](https://github.com/miappks/QR-BarcodeScanner/blob/main/Screenshots/ScannerDark.PNG) | ![SettingsDark](https://github.com/miappks/QR-BarcodeScanner/blob/main/Screenshots/SettingsDark.PNG)
+
 ## Supported types
 
 QR-Code, Aztec-Code, DataMatrix-Code, PDF417, Interleaved 2 of 5
