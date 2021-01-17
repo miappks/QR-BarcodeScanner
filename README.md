@@ -17,7 +17,7 @@ EAN-8, EAN-13, Code39, Code39Mod43, Code93, Code128, ITF14, UPCE
 
 Simply add **QRBarcodeScanner.swift** to your Project.
 
-Add NSCameraUsageDescription to your Info.plist
+Add `<key>NSCameraUsageDescription</key>` to your Info.plist
 
 ## Requirements
 
