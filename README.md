@@ -23,7 +23,7 @@ Add NSCameraUsageDescription to your Info.plist
 ## How to use
 
 ```swift
-let scanner = QRBarcodeScanner(delegate:self)
+let scanner = QRBarcodeScanner(delegate:self, feedbackType: .haptic, autoDismissWhenFoundCode: false)
 
 //OR
 
@@ -34,6 +34,6 @@ scanner.delegate = self
 #### QRBarcodeScannerDelegate
 
 ```swift
-func foundContent(code: String, tag: Int, stringTag: String)
+func foundContent(code: String, scanner:QRBarcodeScanner, tag: Int, stringTag: String)
 func scannerDidDisappear()
 ```
