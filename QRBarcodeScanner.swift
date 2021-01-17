@@ -28,6 +28,7 @@ class QRBarcodeScanner: UIViewController {
     
     //MARK:-Einstellungen
     var feedbackType:FeedbackType = .haptic
+    var autoDismissWhenFoundCode = true
     
     enum FeedbackType {
         case vibrate, haptic, none
@@ -47,13 +48,14 @@ class QRBarcodeScanner: UIViewController {
         
     }
     
-    init(tag:Int? = nil, stringTag:String? = nil, delegate:QRBarcodeScannerDelegate? = nil, feedbackType:FeedbackType = .haptic) {
+    init(tag:Int? = nil, stringTag:String? = nil, delegate:QRBarcodeScannerDelegate? = nil, feedbackType:FeedbackType = .haptic, autoDismissWhenFoundCode:Bool = true) {
         super.init(nibName: nil, bundle: nil)
         
         self.tag = tag
         self.stringTag = stringTag
         self.delegate = delegate
         self.feedbackType = feedbackType
+        self.autoDismissWhenFoundCode = autoDismissWhenFoundCode
     }
     
     required init?(coder: NSCoder) {
@@ -152,7 +154,7 @@ class QRBarcodeScanner: UIViewController {
             captureSession.addOutput(metadataOutput)
             
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.ean8,.qr,.aztec,.code128,.code39,.code39Mod43,.code93,.ean13,.pdf417,.dataMatrix,.interleaved2of5,.itf14,.upce,.face]
+            metadataOutput.metadataObjectTypes = [.ean8,.qr,.aztec,.code128,.code39,.code39Mod43,.code93,.ean13,.pdf417,.dataMatrix,.interleaved2of5,.itf14,.upce]
         } else {
             deviceHasNoCamera()
             return
@@ -290,14 +292,21 @@ extension QRBarcodeScanner: AVCaptureMetadataOutputObjectsDelegate {
             }
             
             // Found Code
+            if autoDismissWhenFoundCode {
+            
             self.dismiss(animated: true) {
-                self.delegate?.foundContent(code: stringValue, tag: self.tag ?? 0, stringTag: self.stringTag ?? "")
+                self.delegate?.foundContent(code: stringValue, scanner: self, tag: self.tag ?? 0, stringTag: self.stringTag ?? "")
             }
+                
+            }else {
+                self.delegate?.foundContent(code: stringValue, scanner: self, tag: self.tag ?? 0, stringTag: self.stringTag ?? "")
+            }
+            
         }
     }
 }
 
 @objc protocol QRBarcodeScannerDelegate {
-    func foundContent(code:String, tag:Int, stringTag:String)
+    func foundContent(code:String, scanner:QRBarcodeScanner, tag:Int, stringTag:String)
     @objc optional func scannerDidDisappear()
 }
