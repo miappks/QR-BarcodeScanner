@@ -43,3 +43,8 @@ scanner.delegate = self
 func foundContent(code: String, scanner:QRBarcodeScanner, tag: Int, stringTag: String)
 func scannerDidDisappear()
 ```
+
+License
+=======
+
+QR-BarcodeScanner is available under the MIT license. [See the LICENSE file for more info.](https://github.com/miappks/QR-BarcodeScanner/blob/main/LICENSE)
